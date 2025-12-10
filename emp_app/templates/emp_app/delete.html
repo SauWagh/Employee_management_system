@@ -1,0 +1,144 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'emp_app/css/style.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 
+    crossorigin="anonymous">
+    <style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-image: url("{% static 'emp_app/images/bg3.jpeg' %}");
+        background-size: cover;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .container {
+        height: 55%;
+        width: 60%;
+        padding: 40px;
+        background: rgba(255, 255, 255, 0.1); /* Transparent white */
+        border-radius: 20px;
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        color: white;
+        text-align: center;
+    }
+    .emp_detail span{
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 0;
+        font-size: 18px;
+    }
+    .btn-s a,
+    .btn-s button {
+    width: 40%;
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 10px;
+    background-color: transparent;
+    border: 3px solid #ffffff;
+    color: #ffffff;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+    font-weight: 900;
+    text-align: center;
+    }
+    .btn-s a:hover,
+    .btn-s button:hover{
+        background-color: rgba(0, 0, 0, 0.329);
+        color: black;
+        cursor: pointer;
+    }
+    .emp_row{
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 0;
+        border-bottom: 3.1px solid #eee;
+        font-size: 18px;
+    }
+
+    .snowflake {
+    position: fixed;
+    top: -10px;
+    color: white;
+    user-select: none;
+    z-index: 9999;
+    pointer-events: none;
+    animation-name: fall;
+    animation-timing-function: linear;
+    animation-iteration-count: 1;
+  }
+
+  @keyframes fall {
+    0% {
+      transform: translateY(0) rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100vh) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+    </style>
+</head>
+<body>
+
+    <div class="overlay"></div>
+
+    <div class="container">
+        <h2>Are you sure you want to delete this employee?</h2>
+        <div class="emp_detail">
+    <div class="emp_row">
+        <span class="label">Employee Name</span>
+        <span class="value">{{ obj.name }}</span>
+    </div>
+    <div class="emp_row">
+        <span class="label">Designation</span>
+        <span class="value">{{ obj.designation }}</span>
+    </div>
+    <div class="emp_row">
+        <span class="label">Email ID</span>
+        <span class="value">{{ obj.email_id }}</span>
+    </div>
+</div>
+        <form class="btn-s input" action="" method="POST">{% csrf_token %}
+            
+            <button type="submit" class="btn btn">Yes im sure</button>&nbsp;&nbsp;
+            <a class="btn btn" href="/forms/emp_list/" role="button">No take me back</a>
+            
+        </form>
+    </div>
+
+    <!-- Snowfall Script -->
+  <script>
+    function createSnowflake() {
+      const snowflake = document.createElement('div');
+      snowflake.classList.add('snowflake');
+      snowflake.textContent = '❄';
+      snowflake.style.left = Math.random() * window.innerWidth + 'px';
+      snowflake.style.fontSize = (Math.random() * 10 + 10) + 'px';
+      snowflake.style.opacity = Math.random();
+      snowflake.style.animationDuration = (Math.random() * 5 + 5) + 's';
+
+      document.body.appendChild(snowflake);
+      setTimeout(() => snowflake.remove(), 10000);
+    }
+
+    setInterval(createSnowflake, 100); // every 100ms
+  </script>
+
+</body>
+</html>
